@@ -1,0 +1,24 @@
+data:
+  data_location: ./audio_dataset
+  extension: wav
+model:
+  block_size: 160
+  hidden_size: 512
+  n_bands: 65
+  n_harmonic: 100
+  sampling_rate: 16000
+preprocess:
+  block_size: 160
+  oneshot: false
+  out_dir: ./preprocessed/ddsp
+  sampling_rate: 16000
+  signal_length: 64000
+train:
+  overlap: 0.75
+  scales:
+  - 4096
+  - 2048
+  - 1024
+  - 512
+  - 256
+  - 128
