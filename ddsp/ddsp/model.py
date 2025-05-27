@@ -225,14 +225,14 @@ class DDSP(nn.Module):
         self.register_buffer("cache_gru", torch.zeros(1, 1, hidden_size))
         self.register_buffer("phase", torch.zeros(1))
 
-    def forward(self, pitch, loudness, param, param2):
+    def forward(self, pitch,param, param2, param3):
         hidden = torch.cat([
             self.in_mlps[0](pitch),
-            self.in_mlps[1](loudness),
-            self.in_mlps[2](param),
-            self.in_mlps[3](param2),
+            self.in_mlps[1](param),
+            self.in_mlps[2](param2),
+            self.in_mlps[3](param3),
         ], -1)
-        hidden = torch.cat([self.gru(hidden)[0], pitch, loudness, param, param2], -1)
+        hidden = torch.cat([self.gru(hidden)[0], pitch, param, param2, param3], -1)
         hidden = self.out_mlp(hidden)
 
         # harmonic part
